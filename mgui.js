@@ -123,7 +123,7 @@ function request_data(query_obj){
             row[7] = parseInt(row[7]);
             var dtype = row[0].substr(0, 1),
                 content,
-                dlinks = '<i>Login to view</i>',
+                dlinks = '<i>Log in to access</i>',
                 biblio_html = (row[7] == 999999) ? '' :
                 '<br />[' + row[5] + '&rsquo;' + row[6].toString().substr(2, 2) + ']'; // special *ref_id*, only handled in GUI
 

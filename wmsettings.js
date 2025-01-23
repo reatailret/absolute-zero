@@ -30,11 +30,11 @@ wmgui.search = {};
 wmgui.sid = null;
 
 wmgui.mob_motto = [
-    'about 0.5M scientific publications and more than 30M data points',
+    'about 0.5M scientific publications and >30M data points for AI training',
     'machine-readable materials data from the world\'s peer-reviewed literature',
-    'the world\'s biggest high-quality online database of materials',
+    'the world\'s biggest high-quality curated database of materials',
     'the largest and most comprehensive inorganic materials dataset',
-    'peer-reviewed materials publications dated from 1891 until now'
+    '~0.5M peer-reviewed materials publications dated from 1891 until now'
 ];
 
 wmgui.cdn_host = 'https://mpds.io';
