@@ -119,6 +119,10 @@ namespace $.$$
 		facets_grouped()
 		{
 			const resp = this.refinements()
+			if(resp.error)
+			{
+				throw new Error( resp.error )
+			}
 			if( Object.keys( this.preselect_classes_options() ).length )
 			{
 				const groups = {} as Record<string, string[]>
