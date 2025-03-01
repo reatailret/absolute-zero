@@ -1,0 +1,75 @@
+$optimade_zero_search $mol_book2
+	api $optimade_zero_api
+		dd_addr_tpl => dd_addr_tpl
+		cdn_host => cdn_host
+		refs_endpoint => refs_endpoint
+		user_sid => user_sid
+	title <= page_title @ \Search page
+	pages <= visible_pages /
+	SearchPage $mol_page
+		title @ \Search
+		tools /
+			<= Spread_close null
+		body /
+			<= SearchLabel $mol_labeler
+				title <= l1 @ \Enter search
+				content /
+					<= search_input_row $mol_row
+						sub /
+							<= Words $mol_search
+								query? <=> word? \
+								suggests <= suggests /
+								suggest_select*?event <=> suggest_select*?event null
+							<= SearchButton $mol_button_major
+								title <= sblabel @ \Search
+								click? <=> search_click? null
+					<= Subrowsearch $mol_row
+						sub /
+							<= FoundStr $mol_paragraph
+								sub /
+									<= found_str @ \Items found: 
+									<= found_count
+							<= ShowResultsLink $mol_link
+								title <= show_results_title @ \Show results
+								arg *
+									results 1
+					<= ClassesPreselector $mol_check_list
+						options <= preselect_classes_options *
+						option_checked*? <=> preselect_classes_checked*? false
+			<= RefinementLabel $mol_labeler
+				title <= l2 @ \Refinements:
+				content <= facet_blocks /
+					<= FacetSelectorLabeler*0 $mol_labeler
+						title <= facet_selector_label* \
+						content / 
+							<= FacetSelector* $mol_check_list
+								options <= refinement_options* *
+								option_checked*? <=> facets_checked*? false
+			
+		foot /
+			<= ClearSearchButton $mol_button_minor
+				title <= clear_search_title @ \Clear search
+				click* <=> clear_search* null
+			<= ReloadButton $mol_button_minor
+				title <= reload_title @ \Reload search
+				click* <=> reset* null
+	ResultsPage $mol_page
+		title @ \Results
+		tools /
+			<= Spread_close_link $mol_link
+				arg *
+					results 0
+				hint <= close_hint @ \Close page
+				sub /
+					<= Spread_close_icon $mol_icon_close
+		body /
+			<= Results $mol_row
+				sub <= result_items /
+	ResultItem* $optimade_zero_resultitem
+		data <= result_item* *
+		dd_addr_tpl <= dd_addr_tpl
+		cdn_host <= cdn_host
+		refs_endpoint <= refs_endpoint
+		user_sid <= user_sid
+		has_access <= user_sid
+

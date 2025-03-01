@@ -1,0 +1,19 @@
+$optimade_zero_app $mol_book2_catalog
+	plugins /
+		<= Theme $mol_theme_auto
+	param \optimade_zero_app_page
+	menu_title \Absolute zero
+	menu_tools /
+		<= Lighter $mol_lights_toggle
+	spreads *
+		search <= Search $optimade_zero_search
+			Spread_close <= Spread_close
+		profile <= Profile $optimade_zero_profile
+			tools /
+				<= Spread_close
+		about <= AboutPage $mol_page
+			title @ \About
+			tools /
+				<= Spread_close
+			body /
+				<= about_text @ \The largest and most comprehensive inorganic materials dataset

@@ -1,0 +1,12 @@
+[optimade_zero_search_resultitem] {
+	align-self: stretch;
+	
+}
+[optimade_zero_resultitem_content] {
+	width: 100%;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+[optimade_zero_resultitem_formula]{
+	display: block;
+}

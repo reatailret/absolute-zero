@@ -1,0 +1,3 @@
+deploy \/optimade/zero/app/assets
+deploy \manifest.webmanifest
+include \/mol/offline/install

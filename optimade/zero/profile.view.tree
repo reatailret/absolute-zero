@@ -1,0 +1,35 @@
+$optimade_zero_profile $mol_page
+	api $optimade_zero_api
+		login_endpoint => login_endpoint
+	title \Profile
+	body /
+		<= LoginCard $mol_card
+			status <= login_status \
+			content <= page_content /
+	logout_content $mol_row
+		sub / 
+			<= ltitle2 @ \Your profile
+			<= logout_button $mol_button_major
+				title <= logout_button_label @ \Logout
+				event_click? <=> event_logout? null
+	login_content $mol_row
+		sub / 
+			<= ltitle @ \Please login (api dont work, CORS error, random SID generated)
+			<= Login $mol_form
+				form_fields /
+					<= email_field $mol_form_field
+						name <= email_label @ \Email
+						bid <= email_bid \
+						control <= Email_control $mol_string
+							value? <=> email? \
+					<= pass_field $mol_form_field
+						name <= pass_label @ \Password
+						bid <= password_bid \
+						control <= Pass_control $mol_string
+							value? <=> password? \
+							type \password
+				buttons /
+					<= Login_submit $mol_button_major
+						title <= login_submit_label @ \Submit
+						event_click? <=> event_login_submit? null
+						disabled <= login_submit_disabled true

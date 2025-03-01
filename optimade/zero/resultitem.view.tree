@@ -1,0 +1,44 @@
+$optimade_zero_resultitem $mol_card
+	minimal_width 210
+	minimal_height 100
+	data *
+	content <= calculated_content /
+	card_content /
+		<= Title $mol_view
+			sub /
+				<= title
+		<= Formula $mol_html_view
+			html <= formula \
+			minimal_height 30
+	image $mol_image
+		uri <= image_url \
+		title <= image_alt \
+		minimal_height 100
+	png_link $mol_link
+		uri <= png_link_url \
+		title \PNG
+		target \_blank
+	pdf_link $mol_link
+		uri <= pdf_link_url \
+		title \PDF
+		target \_blank
+	ref_link $mol_link
+		uri <= ref_link_url \
+		title \Ref.
+		target \_blank
+	anim_link $mol_link
+		uri <= anim_link_url \
+		title \anim
+		target \_blank
+	login_link $mol_link
+		arg *
+			optimade_zero_app_page \profile
+		title \Login to access
+	text $mol_paragraph
+		title <= textcontent \
+	has_access \
+	cdn_host \
+	dd_addr_tpl \
+	user_sid \
+	refs_endpoint \
+
