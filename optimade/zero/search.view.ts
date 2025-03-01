@@ -32,7 +32,8 @@ namespace $.$$
 		{
 			this.reload_search()
 			this.$.$mol_wait_timeout( 200 )
-			return this.api().selectize( this.word() )
+
+			return this.api().selectize( this.word() ).map( el => ({...el, label:el.label.replaceAll('<sup>', '').replaceAll('</sup>', '').replaceAll('<sub>', '').replaceAll('</sub>', '')}) )
 		}
 
 		@$mol_action
@@ -218,7 +219,8 @@ namespace $.$$
 
 			this.preselect_search_facets().map( el =>
 			{
-				result[ `${ el.facet }_${ el.label }` ] = el.label.charAt( 0 ).toUpperCase() + el.label.slice( 1 )
+				const label = el.label
+				result[ `${ el.facet }_${ label }` ] = label
 			} )
 			return result
 		}

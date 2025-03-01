@@ -7,7 +7,7 @@ $optimade_zero_resultitem $mol_card
 		<= Title $mol_view
 			sub /
 				<= title
-		<= Formula $mol_html_view
+		<= Formula $optimade_zero_htmlstring
 			html <= formula \
 			minimal_height 30
 	image $mol_image
