@@ -4,9 +4,8 @@ $optimade_zero_resultitem $mol_card
 	data *
 	content <= calculated_content /
 	card_content /
-		<= Title $mol_view
-			sub /
-				<= title
+		<= Title $optimade_zero_htmlstring
+			html <= title \
 		<= Formula $optimade_zero_htmlstring
 			html <= formula \
 			minimal_height 30
