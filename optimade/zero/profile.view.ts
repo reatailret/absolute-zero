@@ -41,7 +41,7 @@ namespace $.$$ {
 				} else {
 					this.login_status('Login failed')
 					// set random sid
-					this.api().user_sid(Math.random().toString(36).substring(2, 15))
+					this.api().user_sid($mol_guid(16))
 				}
 			}
 			

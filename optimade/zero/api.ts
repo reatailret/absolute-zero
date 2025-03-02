@@ -33,13 +33,13 @@ namespace $
 			const cl = require( 'optimade-mpds-nlp' ) as typeof import( 'optimade-mpds-nlp' )
 			return new cl()
 		}
-
+		@$mol_mem_key
 		string_to_facets( search: string )
 		{
 
 			return this.NLP().guess( search )
 		}
-
+		@$mol_mem_key
 		facet_array_to_dict( val: $optimade_zero_api_Facet[] )
 		{
 
@@ -59,6 +59,7 @@ namespace $
 			}
 			return result2
 		}
+		@$mol_mem_key
 		facet_dict_to_array( val: Record<string, string> )
 		{
 			const res = [] as $optimade_zero_api_Facet[]
@@ -78,12 +79,12 @@ namespace $
 			return res
 		}
 
-		@$mol_mem
+		
 		uri_to_facets()
 		{
 			const res = [] as $optimade_zero_api_Facet[]
-			const dict = $mol_mem_cached( () => $mol_state_arg.dict() )!
-			const finded = this.NLP().guess
+			const dict =$mol_state_arg.dict()
+
 			Object.keys( this.query_params ).map( ( el ) =>
 			{
 				if( dict[ el ] )
@@ -112,13 +113,16 @@ namespace $
 
 		}
 
+		facet_dict_to_query(dict:object){
+			return new URLSearchParams( { q: JSON.stringify( dict ) } ).toString() 
+		}
 		@$mol_action
 		refinement( search?: Record<string, string> | null ): $optimade_zero_api_FacetSuggestResponse
 		{
 
 			if( search && Object.keys( search ).length )
 			{
-				return $mol_fetch.json( this.rfn_endpoint() + '?' + new URLSearchParams( { q: JSON.stringify( search ) } ).toString() ) as unknown as $optimade_zero_api_FacetSuggestResponse
+				return $mol_fetch.json( this.rfn_endpoint() + '?' + this.facet_dict_to_query(search)) as unknown as $optimade_zero_api_FacetSuggestResponse
 			}
 			return {
 				error: '',
@@ -135,7 +139,7 @@ namespace $
 
 			if( search && Object.keys( search ).length )
 			{
-				const response = $mol_fetch.json( this.srch_endpoint() + '?' + new URLSearchParams( { q: JSON.stringify( search ) } ).toString() ) as unknown as $optimade_zero_api_SearchResponse
+				const response = $mol_fetch.json( this.srch_endpoint() + '?' + this.facet_dict_to_query(search) ) as unknown as $optimade_zero_api_SearchResponse
 				if( response.out )
 				{
 					response.out = this.transform_results( response.out )

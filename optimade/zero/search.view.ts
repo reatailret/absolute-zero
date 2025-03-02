@@ -33,7 +33,7 @@ namespace $.$$
 			this.reload_search()
 			this.$.$mol_wait_timeout( 200 )
 
-			return this.api().selectize( this.word() ).map( el => ({...el, label:el.label.replaceAll('<sup>', '').replaceAll('</sup>', '').replaceAll('<sub>', '').replaceAll('</sub>', '')}) )
+			return this.api().selectize( this.word() ).map( el => ({...el, label:el.label.replace(/<\/?(?:sup|sub)>/g, '')}) )
 		}
 
 		@$mol_action

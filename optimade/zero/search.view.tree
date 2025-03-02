@@ -12,9 +12,9 @@ $optimade_zero_search $mol_book2
 			<= Spread_close null
 		body /
 			<= SearchLabel $mol_labeler
-				title <= l1 @ \Enter search
+				title <= label1 @ \Enter search
 				content /
-					<= search_input_row $mol_row
+					<= SearchInputRow $mol_row
 						sub /
 							<= Words $mol_search
 								query? <=> word? \
@@ -23,7 +23,7 @@ $optimade_zero_search $mol_book2
 							<= SearchButton $mol_button_major
 								title <= sblabel @ \Search
 								click? <=> search_click? null
-					<= Subrowsearch $mol_row
+					<= SearchSubRow $mol_row
 						sub /
 							<= FoundStr $mol_paragraph
 								sub /
@@ -37,7 +37,7 @@ $optimade_zero_search $mol_book2
 						options <= preselect_classes_options *
 						option_checked*? <=> preselect_classes_checked*? false
 			<= RefinementLabel $mol_labeler
-				title <= l2 @ \Refinements:
+				title <= label2 @ \Refinements:
 				content <= facet_blocks /
 					<= FacetSelectorLabeler*0 $mol_labeler
 						title <= facet_selector_label* \

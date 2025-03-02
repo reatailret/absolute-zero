@@ -4,9 +4,9 @@ $optimade_zero_resultitem $mol_card
 	data *
 	content <= calculated_content /
 	card_content /
-		<= Title $optimade_zero_htmlstring
+		<= Title $mol_html_view
 			html <= title \
-		<= Formula $optimade_zero_htmlstring
+		<= Formula $mol_html_view
 			html <= formula \
 			minimal_height 30
 	image $mol_image
