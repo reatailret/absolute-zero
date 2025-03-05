@@ -1,0 +1,27 @@
+[optimade_zero_search_searcherexamplelink] {
+	text-overflow: ellipsis;
+}
+[optimade_zero_search_refinementshowmorelink] {
+	font-size: 0.8rem;
+	font-weight: 500;
+}
+[optimade_zero_search_searcheregright] {
+	display: flex;
+	align-items: center;
+	font-size: 0.8rem;
+}
+[optimade_zero_search_searchertitle] {
+	color: var(--mol_theme_shade);
+}
+[optimade_zero_search_searcherlabelrow] {
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	padding-bottom: 0;
+	padding-top: 0;
+	align-items: center;
+}
+[optimade_zero_search_searchinputrow]{
+	flex-wrap: nowrap;
+	padding-left: 0;
+	padding-right: 0;
+}

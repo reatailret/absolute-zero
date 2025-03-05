@@ -31,8 +31,10 @@ $optimade_zero_resultitem $mol_card
 		target \_blank
 	login_link $mol_link
 		arg *
-			optimade_zero_app_page \profile
+			show_login \1
 		title \Login to access
+		current false
+		hint <= login_hint @ \Login to access
 	text $mol_paragraph
 		title <= textcontent \
 	has_access \

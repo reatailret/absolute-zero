@@ -8,6 +8,7 @@ $optimade_zero_app $mol_book2_catalog
 	spreads *
 		search <= Search $optimade_zero_search
 			Spread_close <= Spread_close
+			Words => SearchField
 		profile <= Profile $optimade_zero_profile
 			tools /
 				<= Spread_close

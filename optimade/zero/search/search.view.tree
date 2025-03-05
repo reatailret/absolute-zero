@@ -6,17 +6,38 @@ $optimade_zero_search $mol_book2
 		user_sid => user_sid
 	title <= page_title @ \Search page
 	pages <= visible_pages /
+	LoginPage $optimade_zero_profile
+		title @ \Login
+		tools /
+			<= Login_close_link $mol_link
+				arg *
+					show_login 0
+				hint <= close_hint @ \Close page
+				sub /
+					<= Spread_close_icon $mol_icon_close
 	SearchPage $mol_page
 		title @ \Search
 		tools /
 			<= Spread_close null
 		body /
 			<= SearchLabel $mol_labeler
-				title <= label1 @ \Enter search
+				Label <= SearcherLabelRow $mol_row
+					minimal_height 32
+					sub /$mol_view_content
+						<= SearcherTitle $mol_view
+							sub / <= SearcherTitleInputText @ \Input:
+						<= SearcherEgRight $mol_view
+							sub /$mol_view_content
+								<= SearcherTitleEg @ \e.g.
+								<= SearcherExampleLink $mol_link
+									title <= example_link_title \
+									current false
+									event_click*?event <=> example_link_click*?event null
 				content /
 					<= SearchInputRow $mol_row
 						sub /
 							<= Words $mol_search
+								hint \Type property, elements, classes
 								query? <=> word? \
 								suggests <= suggests /
 								suggest_select*?event <=> suggest_select*?event null
@@ -37,18 +58,21 @@ $optimade_zero_search $mol_book2
 						options <= preselect_classes_options *
 						option_checked*? <=> preselect_classes_checked*? false
 			<= RefinementLabel $mol_labeler
-				title <= label2 @ \Refinements:
-				content <= facet_blocks /
+				title <= label2 @ \Data summary:
+				content <= facet_blocks /$mol_view_content
 					<= FacetSelectorLabeler*0 $mol_labeler
 						title <= facet_selector_label* \
-						content / 
+						content /$mol_view_content
 							<= FacetSelector* $mol_check_list
 								options <= refinement_options* *
 								option_checked*? <=> facets_checked*? false
-			
+							<= RefinementShowMoreLink*?next $mol_link
+								title <= show_more_title @ \Show more
+								event_click <= show_more_click* null
+								current false
 		foot /
 			<= ClearSearchButton $mol_button_minor
-				title <= clear_search_title @ \Clear search
+				title <= clear_search_title @ \New search
 				click* <=> clear_search* null
 			<= ReloadButton $mol_button_minor
 				title <= reload_title @ \Reload search

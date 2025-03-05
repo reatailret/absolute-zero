@@ -10,7 +10,11 @@ namespace $.$$
 		@$mol_mem
 		visible_pages()
 		{
-			return $mol_state_arg.dict()[ 'results' ] ? [ this.SearchPage(), this.ResultsPage() ] : [ this.SearchPage() ]
+			const pages = $mol_state_arg.dict()[ 'results' ] ? [ this.SearchPage(), this.ResultsPage() ] : [ this.SearchPage() ]
+			if($mol_state_arg.dict()[ 'show_login' ] && !this.user_sid()){
+				pages.push(this.LoginPage())
+			}
+			return pages
 		}
 		@$mol_action
 		suggest_select( id: string, event?: MouseEvent )
@@ -58,6 +62,7 @@ namespace $.$$
 		clear_search()
 		{
 			this.preselect_search_facets( [] )
+			this.Words().bring()
 		}
 		@$mol_action
 		reset()
@@ -77,7 +82,7 @@ namespace $.$$
 			$mol_state_arg.dict()
 			if( old )
 			{
-				console.log("clear args")
+				
 				for( const key in old )
 				{
 					$mol_state_arg.value( key, null )
@@ -85,7 +90,7 @@ namespace $.$$
 			}
 			for( const key in dict )
 			{
-				console.log("set args",key,dict[key])
+				
 				$mol_state_arg.value( key, dict[ key ] )
 			}
 			return dict
@@ -117,9 +122,14 @@ namespace $.$$
 		}
 
 		@$mol_mem
-		facets_grouped()
+		facets_grouped(next?: Record<string, string[]>): Record<string, string[]>
 		{
+			if(next){
+				return next
+			}
+			
 			const resp = this.refinements()
+			
 			if(resp.error)
 			{
 				throw new Error( resp.error )
@@ -207,7 +217,7 @@ namespace $.$$
 		@$mol_mem
 		preselect_search_facets( next?: $optimade_zero_api_Facet[] )
 		{
-			console.log("preselect_search_facets",next)
+			
 			return next ?? []
 		}
 		@$mol_mem
@@ -224,5 +234,42 @@ namespace $.$$
 			} )
 			return result
 		}
+		@$mol_mem
+		example_link_title(){
+			
+			return this.example_generated().text
+		}
+		@$mol_mem
+		example_generated(){
+			$mol_state_time.now(4000)
+			return $optimade_zero_search_helper.generate_example()
+		}
+		@$mol_action
+		example_link_click(){
+			const facets = [] as $optimade_zero_api_Facet[]
+			for (let index = 0; index < this.example_generated().facets.length; index++) {
+				const facet = this.example_generated().facets[index];
+				facets.push({
+					facet: facet,
+					label: this.example_generated().terms[index]
+				})
+			}
+			this.preselect_search_facets(facets)
+		}
+		@$mol_action
+		show_more_click(id: string){
+			
+			const facets = this.combined_facets()
+			facets['extd_refine'] = id
+			const resp = this.api().refinement(facets)
+			if(!resp.error && resp.payload.length){
+				const groups = {...this.facets_grouped(),[id]:[...this.facets_grouped()[id],...(resp.payload as any[]).map(el=>el[0])]}
+				
+				this.facets_grouped(groups)
+				
+			}
+			this.RefinementShowMoreLink(id, null as unknown as undefined)
+		}
+
 	}
 }

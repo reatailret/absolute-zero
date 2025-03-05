@@ -40,8 +40,9 @@ namespace $.$$ {
 					$mol_fail_hidden(error);
 				} else {
 					this.login_status('Login failed')
+					console.log(error)
 					// set random sid
-					this.api().user_sid($mol_guid(16))
+					//this.api().user_sid($mol_guid(16))
 				}
 			}
 			
@@ -56,7 +57,7 @@ namespace $.$$ {
 		}
 		@$mol_mem
 		page_content(){
-			return this.api().user_sid() ? [this.logout_content()] : [this.login_content()]
+			return this.api().user_sid() ? [this.LogoutRow()] : [this.LoginRow()]
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace $.$$ {
 			row[7] = parseInt(row[7]);
 			const dtype = row[0].substr(0, 1)
 			let content =  [this.image()]
-			let dlinks = [this.login_link()]
+			let dlinks = this.has_access() ? [] : [this.login_link()]
 			
 			if(this.biblio_html() && this.has_access()){
 				dlinks = [this.ref_link(), this.pdf_link()]

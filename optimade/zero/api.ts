@@ -132,7 +132,7 @@ namespace $
 			}
 
 		}
-
+		
 		@$mol_action
 		results( search?: Record<string, string> | null ): $optimade_zero_api_SearchResponse
 		{
@@ -178,21 +178,20 @@ namespace $
 		{
 
 
-			const resp = $mol_fetch.json( this.login_endpoint(), {
+			const resp = $mol_fetch.text( this.login_endpoint(), {
 				method: 'POST',
-				body: JSON.stringify( { login, pass } ),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			} ) as unknown as { sid: string }
-			
-			if(resp.sid) {
-				this.user_sid(resp.sid)
+				body: new URLSearchParams( { login, pass } )
+				
+			} ) as string
+			const data = JSON.parse(resp)
+			if(data.sid) {
+				this.user_sid(data.sid)
 			}
 			return resp
 
 
 		}
+		
 		@$mol_action
 		logout() {
 			this.user_sid('')
@@ -247,6 +246,8 @@ namespace $
 		{
 			return this.api_host() + '/download'
 		}
+
+		
 	}
 
 	export type $optimade_zero_api_Facet = {

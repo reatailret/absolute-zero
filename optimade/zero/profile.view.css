@@ -1,9 +1,0 @@
-[optimade_zero_profile_logincard_content]{
-	flex-direction: column;
-}
-[optimade_zero_profile_logout_content],[optimade_zero_profile_login_content]{
-	flex-direction: column;
-}
-[optimade_zero_app_profile]{
-	flex-basis: 400px;
-}
