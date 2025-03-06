@@ -2,10 +2,13 @@ namespace $.$$
 {
 	export class $optimade_zero_search extends $.$optimade_zero_search
 	{
-
-		auto(){
-			
+		@$mol_mem
+		auto_url(){
+			if($mol_mem_cached(()=>this.auto_url()) === ''){
+				return ''
+			}	
 			this.preselect_search_facets(this.api().uri_to_facets())
+			return ''
 		}
 		@$mol_mem
 		visible_pages()
@@ -195,7 +198,7 @@ namespace $.$$
 		@$mol_mem
 		result_items()
 		{
-
+			this.$.$mol_wait_timeout( 500 )
 			return this.results().map( ( el, index ) => this.ResultItem( index ) )
 		}
 		@$mol_mem_key
@@ -270,6 +273,8 @@ namespace $.$$
 			}
 			this.RefinementShowMoreLink(id, null as unknown as undefined)
 		}
+
+		
 
 	}
 }

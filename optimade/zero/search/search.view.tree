@@ -20,6 +20,7 @@ $optimade_zero_search $mol_book2
 		tools /
 			<= Spread_close null
 		body /
+			<= auto_url
 			<= SearchLabel $mol_labeler
 				Label <= SearcherLabelRow $mol_row
 					minimal_height 32
