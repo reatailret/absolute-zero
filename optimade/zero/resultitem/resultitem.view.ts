@@ -10,17 +10,18 @@ namespace $.$$ {
 		@$mol_mem
 		title(next?:string)
 		{
-			return next ?? this.data()[ 2 ]
+			return next ?? (this.data().length ? this.data()[ 2 ] : '')
 		}
 		@$mol_mem
 		formula(next?:string)
 		{
-			return next ?? this.data()[ 1 ]
+			return next ?? (this.data().length ? this.data()[ 1 ] : '')
 		}
 
 		@$mol_mem
 		contentblock(){
 			
+			if(!this.data().length) return []
 			const row = this.data()
 			row[7] = parseInt(row[7]);
 			const dtype = row[0].substr(0, 1)
